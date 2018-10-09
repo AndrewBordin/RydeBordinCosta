@@ -45,8 +45,6 @@ class ViewController: UIViewController {
         }
         
     }
-
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,6 +56,7 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         let fromLocation = txtFromLocation.text!
@@ -71,7 +70,29 @@ class ViewController: UIViewController {
         page2.distanceCharge = amtKm*perKmCharge
         page2.bookingFeePrice = baseFare
         
+    }
+
+     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == "segueIdentifier" {
+            
+            if (txtFromLocation.text != "Sheridan Oakville" || txtToLocation.text != "Sheridan Brampton") {
+                
+                let alertController = UIAlertController(title: "Invalid Location", message:
+                    "Please input a valid location.", preferredStyle: UIAlertControllerStyle.alert)
+                alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
+                
+                self.present(alertController, animated: true, completion: nil)
+                
+                return false
+            }
+                
+            else {
+                return true
+            }
+        }
         
+        // by default, transition
+        return true
     }
 
     @IBAction func btnFindRide(_ sender: Any) {
@@ -103,10 +124,6 @@ class ViewController: UIViewController {
         if (totalPrice < minimumFee) {
             totalPrice = minimumFee
         }
-        
-        //TODO: SURGE PRICING
-        //TODO: RydePOOl Rates
-
     }
 }
 
