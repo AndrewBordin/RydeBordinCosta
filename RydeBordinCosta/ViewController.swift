@@ -19,10 +19,15 @@ class ViewController: UIViewController {
     let SheridanToBrampton:Double = 40.70
     let SheridanToBoot:Double = 4.8
     var rydePoolRate:Double = 1.00
+    var surgeHourRate:Double = 1.00
     
     var amtKm:Double = 0
     
     var totalPrice:Double = 0
+    
+    let date = Date()
+    let calendar = Calendar.current
+   
     
     @IBOutlet weak var txtFromLocation: UITextField!
     @IBOutlet weak var txtToLocation: UITextField!
@@ -71,6 +76,16 @@ class ViewController: UIViewController {
 
     @IBAction func btnFindRide(_ sender: Any) {
         
+        let hour = calendar.component(.hour, from: date)
+        
+        if (hour >= 16 && hour < 18){
+            surgeHourRate = 1.20
+        }
+        
+        else {
+            surgeHourRate = 1.00
+        }
+        
         if (txtFromLocation.text == "Sheridan Oakville" && txtToLocation.text == "Sheridan Brampton"){
             amtKm = SheridanToBrampton
         }
@@ -83,7 +98,7 @@ class ViewController: UIViewController {
             print("invalid location")
         }
         
-        totalPrice = (baseFare + (amtKm * perKmCharge) + serviceFees) * rydePoolRate
+        totalPrice = (baseFare + (amtKm * (perKmCharge * surgeHourRate)) + serviceFees) * rydePoolRate
         
         if (totalPrice < minimumFee) {
             totalPrice = minimumFee
