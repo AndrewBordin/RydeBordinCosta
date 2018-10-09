@@ -26,7 +26,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func btnFindRide(_ sender: Any) {
-        
+        print("test btnFindRide")
     }
 }
 
