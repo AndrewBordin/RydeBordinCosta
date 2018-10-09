@@ -19,22 +19,26 @@ class ConfirmationViewController: UIViewController {
     
     var fromLocation:String = ""
     var toLocation:String = ""
-    var totalPrice:String = ""
-    var serviceFee:String = ""
-    var distanceCharge:String = ""
-    var bookingFeePrice:String = ""
+    var totalPrice:Double = 0
+    var serviceFee:Double = 0
+    var distanceCharge:Double = 0
+    var bookingFeePrice:Double = 0
+    
+    func roundNumber(x:Double) -> String{
+        let roundedNumber = String(format:"$ %.2f", x)
+        return roundedNumber
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         txtFromLocation.text = fromLocation
         txtToLocation.text = toLocation
-        txtTotalPrice.text = totalPrice
-        txtServiceFee.text = serviceFee
-        txtDistanceCharge.text = distanceCharge
-        txtBookingFeePrice.text = bookingFeePrice
+        txtTotalPrice.text = roundNumber(x:totalPrice)
+        txtServiceFee.text = roundNumber(x:serviceFee)
+        txtDistanceCharge.text = roundNumber(x:distanceCharge)
+        txtBookingFeePrice.text = roundNumber(x:bookingFeePrice)
 
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {

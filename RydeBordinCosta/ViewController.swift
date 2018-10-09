@@ -14,6 +14,21 @@ class ViewController: UIViewController {
     @IBOutlet weak var txtFromLocation: UITextField!
     @IBOutlet weak var txtToLocation: UITextField!
     
+    let baseFare:Double = 2.50
+    let perKmCharge:Double = 0.81
+    let serviceFees:Double = 1.75
+    let minimumFee:Double = 4.64
+    
+    let SheridanToBrampton:Double = 40.70
+    let SheridanToBoot:Double = 4.8
+    
+    var amtKm:Double = 0
+    
+    var totalPrice:Double = 0
+    
+    
+
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,32 +45,40 @@ class ViewController: UIViewController {
         let fromLocation = txtFromLocation.text!
         let toLocation = txtToLocation.text!
         
-        // 2. SET the placeholder variable in page 2
-        // 2a. get an object reference of the 2nd page
-        // 2b. set the placeholder variable
-        
         let page2 = segue.destination as! ConfirmationViewController
         page2.fromLocation = fromLocation
         page2.toLocation = toLocation
-        page2.totalPrice = ""
-        page2.serviceFee = ""
-        page2.distanceCharge = ""
-        page2.bookingFeePrice = ""
+        page2.totalPrice = totalPrice
+        page2.serviceFee = serviceFees
+        page2.distanceCharge = amtKm*perKmCharge
+        page2.bookingFeePrice = baseFare
         
-        
-        //HomeScreenViewController page2 = (HomeScreenViewController) segue.destination;
-        //page2.username = data;
-        
-        
-        
-        
-        
-        // 3. DONE!
         
     }
 
     @IBAction func btnFindRide(_ sender: Any) {
-        print("test btnFindRide")
+        
+        if (txtFromLocation.text == "Sheridan Oakville" && txtToLocation.text == "Sheridan Brampton"){
+            amtKm = SheridanToBrampton
+        }
+        
+        else if (txtFromLocation.text == "Sheridan Oakville" && txtToLocation.text == "The Boot Social") {
+            amtKm = SheridanToBoot
+        }
+        
+        else {
+            print("invalid location")
+        }
+        
+        totalPrice = baseFare + (amtKm * perKmCharge) + serviceFees
+        
+        if (totalPrice < minimumFee) {
+            totalPrice = minimumFee
+        }
+        
+        //TODO: SURGE PRICING
+        //TODO: RydePOOl Rates
+
     }
 }
 
