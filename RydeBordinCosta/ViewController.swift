@@ -10,10 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    
-    @IBOutlet weak var txtFromLocation: UITextField!
-    @IBOutlet weak var txtToLocation: UITextField!
-    
+   
     let baseFare:Double = 2.50
     let perKmCharge:Double = 0.81
     let serviceFees:Double = 1.75
@@ -21,12 +18,28 @@ class ViewController: UIViewController {
     
     let SheridanToBrampton:Double = 40.70
     let SheridanToBoot:Double = 4.8
+    var rydePoolRate:Double = 1.00
     
     var amtKm:Double = 0
     
     var totalPrice:Double = 0
     
+    @IBOutlet weak var txtFromLocation: UITextField!
+    @IBOutlet weak var txtToLocation: UITextField!
     
+    @IBOutlet weak var rydePool: UISwitch!
+    var switchON : Bool = false
+    
+    @IBAction func checkState(_ sender: AnyObject) {
+        
+        if rydePool.isOn{
+            rydePoolRate = 0.90
+        }
+        else if rydePool.isOn == false{
+            rydePoolRate = 1.00
+        }
+        
+    }
 
     
     
@@ -70,7 +83,7 @@ class ViewController: UIViewController {
             print("invalid location")
         }
         
-        totalPrice = baseFare + (amtKm * perKmCharge) + serviceFees
+        totalPrice = (baseFare + (amtKm * perKmCharge) + serviceFees) * rydePoolRate
         
         if (totalPrice < minimumFee) {
             totalPrice = minimumFee

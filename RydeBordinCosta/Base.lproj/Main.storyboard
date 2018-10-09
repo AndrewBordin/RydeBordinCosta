@@ -72,6 +72,9 @@
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="qyk-YK-QS9">
                                 <rect key="frame" x="164" y="409" width="49" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="checkState:" destination="BYZ-38-t0r" eventType="valueChanged" id="xsy-1l-NYU"/>
+                                </connections>
                             </switch>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -81,6 +84,7 @@
                         <barButtonItem key="backBarButtonItem" title="Back" id="tEf-Cp-iQf"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="rydePool" destination="qyk-YK-QS9" id="9RW-4s-8kX"/>
                         <outlet property="txtFromLocation" destination="Hx8-dU-cmq" id="PPH-A2-P7o"/>
                         <outlet property="txtToLocation" destination="U2E-Hz-eD1" id="bbQ-XR-rWu"/>
                     </connections>
