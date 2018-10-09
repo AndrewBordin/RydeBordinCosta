@@ -10,7 +10,6 @@ import UIKit
 
 class ConfirmationViewController: UIViewController {
 
-    @IBOutlet weak var txtConfirm: UILabel!
     @IBOutlet weak var txtFromLocation: UILabel!
     @IBOutlet weak var txtToLocation: UILabel!
     @IBOutlet weak var txtTotalPrice: UILabel!
@@ -18,8 +17,22 @@ class ConfirmationViewController: UIViewController {
     @IBOutlet weak var txtDistanceCharge: UILabel!
     @IBOutlet weak var txtBookingFeePrice: UILabel!
     
+    var fromLocation:String = ""
+    var toLocation:String = ""
+    var totalPrice:String = ""
+    var serviceFee:String = ""
+    var distanceCharge:String = ""
+    var bookingFeePrice:String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        txtFromLocation.text = fromLocation
+        txtToLocation.text = toLocation
+        txtTotalPrice.text = totalPrice
+        txtServiceFee.text = serviceFee
+        txtDistanceCharge.text = distanceCharge
+        txtBookingFeePrice.text = bookingFeePrice
 
         // Do any additional setup after loading the view.
     }
@@ -28,16 +41,5 @@ class ConfirmationViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
