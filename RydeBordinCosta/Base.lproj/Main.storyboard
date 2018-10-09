@@ -91,9 +91,8 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="lblTitle" destination="sId-2b-qq3" id="cck-0c-ci8"/>
-                        <outlet property="txtFrom" destination="Hx8-dU-cmq" id="LzD-uO-TGf"/>
-                        <outlet property="txtToLocation" destination="U2E-Hz-eD1" id="Har-4f-j9A"/>
+                        <outlet property="txtFromLocation" destination="Hx8-dU-cmq" id="PPH-A2-P7o"/>
+                        <outlet property="txtToLocation" destination="U2E-Hz-eD1" id="bbQ-XR-rWu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -206,7 +205,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bvU-29-XfA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="748" y="118"/>
+            <point key="canvasLocation" x="556" y="118"/>
         </scene>
     </scenes>
 </document>

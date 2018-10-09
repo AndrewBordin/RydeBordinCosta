@@ -14,7 +14,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var txtFromLocation: UITextField!
     @IBOutlet weak var txtToLocation: UITextField!
     
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
