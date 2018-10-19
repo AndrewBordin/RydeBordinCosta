@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  RydeBordinCosta
 //
-//  Created by Andrew Bordin on 10/9/18.
+//  Created by Andrew Bordin and Fernando Costa on 10/9/18.
 //  Copyright © 2018 Andrew Bordin. All rights reserved.
 //
 
@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController {
     
    
+    //Set up variables and constants given on the assignment
     let baseFare:Double = 2.50
     let perKmCharge:Double = 0.81
     let serviceFees:Double = 1.75
@@ -18,23 +19,30 @@ class ViewController: UIViewController {
     
     let SheridanToBrampton:Double = 40.70
     let SheridanToBoot:Double = 4.8
+    
+    var amtKm:Double = 0
+    var totalPrice:Double = 0
+    var distanceCharged:Double = 0.00
+    
+    //Multipliers which will change value depending on the app usage hours
+    //or if the user chooses rydePool
     var rydePoolRate:Double = 1.00
     var surgeHourRate:Double = 1.00
     
-    var amtKm:Double = 0
     
-    var totalPrice:Double = 0
-    
+    //Get current hour for the surgeHourRate
     let date = Date()
     let calendar = Calendar.current
    
     
+    //Declaration of UI Variables
     @IBOutlet weak var txtFromLocation: UITextField!
     @IBOutlet weak var txtToLocation: UITextField!
     
     @IBOutlet weak var rydePool: UISwitch!
     var switchON : Bool = false
     
+    //Check if user wants rydePool or not
     @IBAction func checkState(_ sender: AnyObject) {
         
         if rydePool.isOn{
@@ -56,7 +64,7 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    //Sending the values from the main page to the confirmation page
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         let fromLocation = txtFromLocation.text!
@@ -67,11 +75,14 @@ class ViewController: UIViewController {
         page2.toLocation = toLocation
         page2.totalPrice = totalPrice
         page2.serviceFee = serviceFees
-        page2.distanceCharge = amtKm*perKmCharge
+        page2.distanceCharge = distanceCharged
         page2.bookingFeePrice = baseFare
         
     }
 
+    //Function that checks if the segue should happen or not
+    //If the user inputs invalid locations, then an alert is shown and the segue
+    //does not perform
      override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if identifier == "segueIdentifier" {
             
@@ -95,8 +106,9 @@ class ViewController: UIViewController {
         return true
     }
 
+    //Perform Calculations and Error checking when user clicks 'Find My Ryde'
     @IBAction func btnFindRide(_ sender: Any) {
-        
+        //Getting the current time, time will be in military time
         let hour = calendar.component(.hour, from: date)
         
         if (hour >= 16 && hour < 18){
@@ -107,20 +119,21 @@ class ViewController: UIViewController {
             surgeHourRate = 1.00
         }
         
+        //Checking the locations the user has inputed and setting the total amount in km
         if (txtFromLocation.text == "Sheridan Oakville" && txtToLocation.text == "Sheridan Brampton"){
             amtKm = SheridanToBrampton
         }
-        
         else if (txtFromLocation.text == "Sheridan Oakville" && txtToLocation.text == "The Boot Social") {
             amtKm = SheridanToBoot
         }
-        
         else {
             print("invalid location")
         }
         
-        totalPrice = (baseFare + (amtKm * (perKmCharge * surgeHourRate)) + serviceFees) * rydePoolRate
+        distanceCharged = amtKm * (perKmCharge * surgeHourRate)
+        totalPrice = (baseFare + (distanceCharged) + serviceFees) * rydePoolRate
         
+        //Checking if the total price is lower than $4.64 (Minimum fee)
         if (totalPrice < minimumFee) {
             totalPrice = minimumFee
         }
