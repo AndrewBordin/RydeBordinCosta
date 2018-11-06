@@ -86,7 +86,7 @@ class ViewController: UIViewController {
      override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if identifier == "segueIdentifier" {
             
-            if (txtFromLocation.text != "Sheridan Oakville" || txtToLocation.text != "Sheridan Brampton") {
+            if (txtFromLocation.text != "Sheridan Oakville" && (txtToLocation.text != "Sheridan Brampton" || txtToLocation.text != "The Boot Social")) {
                 
                 let alertController = UIAlertController(title: "Invalid Location", message:
                     "Please input a valid location.", preferredStyle: UIAlertControllerStyle.alert)
